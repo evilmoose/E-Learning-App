@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import './App.css'
+import './bootstrap.min.css'
 import AboutPage from './components/AboutPage';
 import Header from './components/Header';
 
