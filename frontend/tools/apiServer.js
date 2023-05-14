@@ -11,13 +11,16 @@ Relevant source code: https://github.com/typicode/json-server/blob/master/src/cl
 */
 
 /* eslint-disable no-console */
-import { create, router as _router, defaults, bodyParser } from "json-server";
-const server = create();
-import { join } from "path";
-const router = _router(join(__dirname, "db.json"));
+import jsonServer from "json-server";
+const server = jsonServer.create();
+import path from "path";
+
+const __dirname = path.resolve()
+
+const router = jsonServer.router(path.join(__dirname, "db.json"));
 
 // Can pass a limited number of options to this to override (some) defaults. See https://github.com/typicode/json-server#api
-const middlewares = defaults({
+const middlewares = jsonServer.defaults({
   // Display json-server's built in homepage when json-server starts.
   static: "node_modules/json-server/dist"
 });
@@ -26,7 +29,7 @@ const middlewares = defaults({
 server.use(middlewares);
 
 // To handle POST, PUT and PATCH you need to use a body-parser. Using JSON Server's bodyParser
-server.use(bodyParser);
+server.use(jsonServer.bodyParser);
 
 // Simulate delay on all requests
 server.use(function(req, res, next) {
