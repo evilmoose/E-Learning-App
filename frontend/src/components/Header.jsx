@@ -3,15 +3,13 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
 
-    const activeStyle = {
-        color: "#F15B2A"
-    }
-
     return ( 
         <nav>
-            <NavLink to="/" activeStyle={activeStyle} exact>Home</NavLink>
+            <NavLink to="/" exact="true">Home</NavLink>
             {" | "}
-            <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
+            <NavLink to="/about">About</NavLink>
+            {" | "}
+            <NavLink to="/courses">Courses</NavLink>
         </nav>
      )
 }
