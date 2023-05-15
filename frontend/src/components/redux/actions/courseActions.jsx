@@ -1,12 +1,12 @@
-import types from "./actionTypes.jsx";
+import {CREATE_COURSE, LOAD_COURSES_SUCCESS} from "./actionTypes.jsx";
 import * as courseApi from "../../../api/courseApi.js"
 
 export function createCourse(course) {
-  return { type: types.CREATE_COURSE, course };
+  return { type: CREATE_COURSE, course };
 }
 
 export function loadCourseSuccess(courses) {
-  return { type: types.LOAD_COURSES_SUCCESS, courses };
+  return { type: LOAD_COURSES_SUCCESS, courses };
 }
 
 export function loadCourses() {

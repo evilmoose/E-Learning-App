@@ -6,6 +6,12 @@ import PropTypes from 'prop-types';
 
 class CoursesPage extends React.Component {
 
+  componentDidMount() {
+    this.props.actions.loadCourses().catch( (error) => {
+      alert("Loading course faile" + error);
+    });
+  }
+
     render() {
         return (
           <>  
