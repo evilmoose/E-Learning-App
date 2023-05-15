@@ -1,5 +1,9 @@
 import { handleResponse, handleError } from "./apiUtils";
-const baseUrl = process.env.API_URL + "/courses/";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const baseUrl = dotenv.process.env.API_URL + "/courses/";
 
 export function getCourses() {
   return fetch(baseUrl)
