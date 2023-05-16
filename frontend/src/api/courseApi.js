@@ -1,11 +1,6 @@
 import { handleResponse, handleError } from "./apiUtils";
-import dotenv from 'dotenv';
 
-import.meta.env
-
-dotenv.config();
-
-const baseUrl = dotenv.process.env.API_URL + "/courses/";
+const baseUrl = import.meta.env.VITE_API_URL + "/courses/";
 
 export function getCourses() {
   return fetch(baseUrl)
