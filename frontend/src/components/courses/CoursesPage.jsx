@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as courseActions from '../redux/actions/courseActions.jsx';
 import PropTypes from 'prop-types';
+import CourseList from "./CourseList.jsx";
 
 class CoursesPage extends React.Component {
 
@@ -16,9 +17,7 @@ class CoursesPage extends React.Component {
         return (
           <>  
             <h2>Courses</h2>
-              {this.props.courses.map(course => (
-            <div key={course.title}>{course.title}</div>
-        ))}
+            <CourseList courses={this.props.courses} />
           </>
         )
     } 
