@@ -3,6 +3,8 @@ import { handleResponse, handleError } from "./apiUtils";
 const baseUrl = import.meta.env.VITE_API_URL + "/courses/";
 
 export function getCourses() {
+  console.log('get courses')
+  console.log(baseUrl)
   return fetch(baseUrl)
     .then(handleResponse)
     .catch(handleError);

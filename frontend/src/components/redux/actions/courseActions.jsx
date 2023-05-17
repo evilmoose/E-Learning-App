@@ -16,7 +16,7 @@ export function loadCourses() {
       .then(courses => {
         dispatch(loadCourseSuccess(courses));
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   };
