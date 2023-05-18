@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
 import { connect } from "react-redux";
-import {loadCourses} from '../redux/actions/courseActions.jsx';
+import {loadCourses, saveCourse} from '../redux/actions/courseActions.jsx';
 import {loadAuthors} from '../redux/actions/authorActions.jsx';
 import PropTypes from 'prop-types';
 import CourseForm from "./CourseForm.jsx"
-import mockData from "../../../tools/mockData.js"
+import mockData from "../../../tools/mockData.js";
 
  // eslint-disable-next-line react-refresh/only-export-components
  function ManageCoursePage({
@@ -12,6 +12,8 @@ import mockData from "../../../tools/mockData.js"
     authors, 
     loadAuthors, 
     loadCourses, 
+    saveCourse,
+    history,
     ...props
 }) {
     
@@ -20,23 +22,45 @@ import mockData from "../../../tools/mockData.js"
 
     useEffect(() => {
     
-    console.log(courses.length);
-    // Load course
-    if (courses.length === 0) {
-      loadCourses().catch( (error) => {
-        alert("Loading course faile" + error);
-      });
-    }    
-    // Load authors
-    if (authors.length === 0) {
-      loadAuthors().catch( (error) => {
-        alert("Loading authors faile" + error);
-      });
-    }  
-  }, []);
+        console.log(courses.length);
+        // Load course
+        if (courses.length === 0) {
+            loadCourses().catch( (error) => {
+                alert("Loading course faile" + error);
+            });
+        }    
+        // Load authors
+        if (authors.length === 0) {
+            loadAuthors().catch( (error) => {
+                alert("Loading authors faile" + error);
+            });
+        }  
+    }, []);
+
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setCourse(prevCourse => ({
+            ...prevCourse,
+            [name]: name === "authorId" ? parseInt(value, 10) : value
+        }));
+    }
+    
+    function handleSave(event) {
+        event.preventDefault();
+        saveCourse(course).then(() => {
+            history.push("/courses");
+            console.log(history)
+        });
+    }
 
     return (
-        <CourseForm course={course} errors={errors} authors={authors} />
+        <CourseForm 
+            course={course} 
+            errors={errors} 
+            authors={authors} 
+            onChange={handleChange} 
+            onSave={handleSave}
+        />
     )
 } 
 
@@ -45,7 +69,9 @@ ManageCoursePage.propTypes = {
     courses: PropTypes.array.isRequired,
     authors: PropTypes.array.isRequired,
     loadCourses: PropTypes.func.isRequired,
-    loadAuthors: PropTypes.func.isRequired
+    loadAuthors: PropTypes.func.isRequired,
+    saveCourse: PropTypes.func.isRequired,
+    history: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -58,7 +84,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     loadCourses,
-    loadAuthors
+    loadAuthors,
+    saveCourse
 }
 
 
