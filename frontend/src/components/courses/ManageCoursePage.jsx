@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as courseActions from '../redux/actions/courseActions.jsx';
-import * as authorActions from '../redux/actions/authorActions.jsx';
+import {loadCourses} from '../redux/actions/courseActions.jsx';
+import {loadAuthors} from '../redux/actions/authorActions.jsx';
 import PropTypes from 'prop-types';
 
 class ManageCoursePage extends React.Component {
@@ -45,8 +45,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    loadCourses: courseActions.loadCourses,
-    loadAuthors: authorActions.loadAuthors
+    loadCourses,
+    loadAuthors
 }
 
 
