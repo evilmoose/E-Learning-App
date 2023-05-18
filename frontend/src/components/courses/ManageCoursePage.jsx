@@ -20,23 +20,36 @@ import mockData from "../../../tools/mockData.js"
 
     useEffect(() => {
     
-    console.log(courses.length);
-    // Load course
-    if (courses.length === 0) {
-      loadCourses().catch( (error) => {
-        alert("Loading course faile" + error);
-      });
-    }    
-    // Load authors
-    if (authors.length === 0) {
-      loadAuthors().catch( (error) => {
-        alert("Loading authors faile" + error);
-      });
-    }  
-  }, []);
+        console.log(courses.length);
+        // Load course
+        if (courses.length === 0) {
+            loadCourses().catch( (error) => {
+                alert("Loading course faile" + error);
+            });
+        }    
+        // Load authors
+        if (authors.length === 0) {
+            loadAuthors().catch( (error) => {
+                alert("Loading authors faile" + error);
+            });
+        }  
+    }, []);
+
+    function handleChange(event) {
+        const { name, value } = event.target;
+        setCourse(prevCourse => ({
+            ...prevCourse,
+            [name]: name === "authorId" ? parseInt(value, 10) : value
+        }));
+    }
 
     return (
-        <CourseForm course={course} errors={errors} authors={authors} />
+        <CourseForm 
+            course={course} 
+            errors={errors} 
+            authors={authors} 
+            onChange={handleChange} 
+        />
     )
 } 
 
