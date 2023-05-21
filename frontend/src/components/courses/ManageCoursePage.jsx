@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import {loadCourses, saveCourse} from '../redux/actions/courseActions.jsx';
 import {loadAuthors} from '../redux/actions/authorActions.jsx';
@@ -28,6 +28,9 @@ import mockData from "../../../tools/mockData.js";
             loadCourses().catch( (error) => {
                 alert("Loading course faile" + error);
             });
+        }
+        else {
+            setCourse({...props.course})
         }    
         // Load authors
         if (authors.length === 0) {
@@ -35,7 +38,7 @@ import mockData from "../../../tools/mockData.js";
                 alert("Loading authors faile" + error);
             });
         }  
-    }, []);
+    }, [props.course]);
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -48,7 +51,6 @@ import mockData from "../../../tools/mockData.js";
     function handleSave(event) {
         event.preventDefault();
         saveCourse(course).then(() => {
-            history.push("/courses");
             console.log(history)
         });
     }
@@ -74,9 +76,19 @@ ManageCoursePage.propTypes = {
     history: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
+export function getCourseBySlug(courses, slug) {
+    return courses.find(course => course.slug === slug) || null;
+}
+
+function mapStateToProps(state, ownProps) {
+    const slug = ownProps.match;    // I get a params not found erro with ownProps.match.params.slug
+    const course = 
+        slug && state.courses.length > 0 
+            ? getCourseBySlug(state.courses, slug) 
+            : mockData.newCourse
+
     return {
-        course: mockData.newCourse,
+        course,
         courses: state.courses,
         authors: state.authors
     };
