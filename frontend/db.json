@@ -73,17 +73,9 @@
     {
       "id": 11,
       "title": "w",
-      "authorId": 1,
+      "authorId": 2,
       "category": "w",
-      "createdAt": 1684709624932,
-      "slug": "w"
-    },
-    {
-      "id": 12,
-      "title": "w",
-      "authorId": 1,
-      "category": "w",
-      "createdAt": 1684709629197,
+      "createdAt": 1684771913876,
       "slug": "w"
     }
   ],
